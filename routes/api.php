@@ -1,8 +1,11 @@
 <?php
 
-use App\Http\Controllers\API\V1\UserController;
+use App\Http\Controllers\API\V1\LoginController;
+use App\Http\Controllers\API\V1\Rooms\RoomController;
+use App\Http\Controllers\API\V1\Rooms\RoomDetailsController;
+use App\Http\Controllers\API\V1\Rooms\RoomImagesController;
+use App\Http\Controllers\API\V1\Rooms\RoomReviewsController;
 use App\Http\Controllers\API\V1\UserDataController;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,6 +20,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('v1')->group(function(){
+    Route::post('/login', LoginController::class);
     Route::apiResource('/users', UserDataController::class);
-    Route::apiResource('/usersdata', UserController::class);
+    Route::apiResource('/rooms', RoomController::class);
+    Route::apiResource('/roomdetails', RoomDetailsController::class);
+    Route::apiResource('/roomratings', RoomReviewsController::class);
+    Route::apiResource('/roomimages', RoomImagesController::class);
 });
