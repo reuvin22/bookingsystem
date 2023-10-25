@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\V1\UserController;
 use App\Http\Controllers\API\V1\UserDataController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
@@ -17,4 +18,5 @@ use Illuminate\Support\Facades\Route;
 
 Route::prefix('v1')->group(function(){
     Route::apiResource('/users', UserDataController::class);
+    Route::apiResource('/usersdata', UserController::class);
 });

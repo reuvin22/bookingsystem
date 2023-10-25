@@ -3,9 +3,10 @@
 namespace App\Http\Controllers\API\V1;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\UserData;
 use App\Models\User;
+use App\Models\UserData;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
 
 class UserDataController extends Controller
@@ -15,15 +16,27 @@ class UserDataController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $data = DB::table('users')
+        ->join('user_data', 'users.id', '=', 'user_data.id')
+        ->get();
 
-        return ($users->isEmpty()) ? [
-            'status' => 200,
-            'message' => 'No Record Found!'
-        ] : [
-            'status' => 200,
-            'data' => $users
-        ];
+        $users = [];
+        foreach($data as $datas){
+            $response[] = [
+                'id' => $datas->id,
+                'email' => $datas->email,
+                'firstName' => $datas->firstName,
+                'lastName' => $datas->lastName,
+                'address' => $datas->address,
+                'birthDate' => $datas->birthDate
+            ];
+            $users = [
+                'status' => 200,
+                'data' => $response
+            ];
+        }
+
+        return response($users, 200);
     }
 
     /**
@@ -34,19 +47,46 @@ class UserDataController extends Controller
         $data = $request->json()->all();
 
         $validation = Validator::make($data, [
-            'email' => 'required|string',
-            'password' => 'required|string|min:8'
+            'email' => 'required|string|email',
+            'password' => 'required|string|min:8',
+            'firstName' => 'required|string',
+            'lastName' => 'required|string',
+            'address' => 'required|string',
+            'birthDate' => 'required|date'
         ]);
+        if($validation->fails()){
+            return response()->json([
+                'status' => 400,
+                'message' => $validation->errors()
+            ],400);
+        }
 
-        $userData = User::create([
+        $user = User::create([
             'email' => $data['email'],
             'password' => $data['password']
         ]);
 
-        return $userData ? [
+        $userData = UserData::create([
+            'id' => $user->id,
+            'firstName' => $data['firstName'],
+            'lastName' => $data['lastName'],
+            'address' => $data['address'],
+            'birthDate' => $data['birthDate']
+        ]);
+
+        $dataList = [
+            'id' => $user->id,
+            'email' => $user->email,
+            'firstName' => $userData->firstName,
+            'lastName' => $userData->lastName,
+            'address' => $userData->address,
+            'birthDate' => $userData->birthDate
+        ];
+
+        return $user && $userData ? [
             'status' => 200,
             'message' => 'Data Inserted Successfully',
-            'data' => $userData
+            'data' => $dataList
         ] : [
             'status' => 400,
             'message' => 'Data Insert Failed'
@@ -58,7 +98,25 @@ class UserDataController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $data = DB::table('users')
+        ->join('user_data', 'users.id', '=', 'user_data.id')
+        ->where('users.id', $id)
+        ->first();
+
+        $response = [
+            'id' => $data->id,
+            'email' => $data->email,
+            'firstName' => $data->firstName,
+            'lastName' => $data->lastName,
+            'address' => $data->address,
+            'birthDate' => $data->birthDate
+        ];
+        $users = [
+            'status' => 200,
+            'data' => $response
+        ];
+
+        return response($users, 200);
     }
 
     /**
@@ -66,7 +124,29 @@ class UserDataController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+
+        $users = User::findorFail($id);
+        $update = $users->update($request->json()->all());
+        $usersData = UserData::findorFail($id);
+        $updateUserData = $usersData->update($request->json()->all());
+
+        $dataList = [
+            'id' => $users->id,
+            'email' => $users->email,
+            'firstName' => $usersData->firstName,
+            'lastName' => $usersData->lastName,
+            'address' => $usersData->address,
+            'birthDate' => $usersData->birthDate
+        ];
+
+        return $update && $updateUserData ? [
+            'status' => 200,
+            'message' => 'Update Successfully',
+            'data' => $dataList
+        ]: [
+            'status' => 400,
+            'message' => 'Update Failed'
+        ];
     }
 
     /**
@@ -74,6 +154,17 @@ class UserDataController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $user = User::findorFail($id);
+        $delete = $user->delete($id);
+        $userData = UserData::findorFail($id);
+        $deleteUser = $userData->delete($id);
+
+        return $delete && $deleteUser? [
+            'status' => 200,
+            'message' => 'Deleted Successfully'
+        ]: [
+            'status' => 400,
+            'message' => 'Delete Failed'
+        ];
     }
 }
