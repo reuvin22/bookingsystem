@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\UserData;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Validator;
 
 class UserDataController extends Controller
 {
@@ -28,11 +29,19 @@ class UserDataController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(UserData $request)
+    public function store(Request $request)
     {
-        $data = $request->validated();
+        $data = $request->json()->all();
 
-        $userData = User::create($data);
+        $validation = Validator::make($data, [
+            'email' => 'required|string',
+            'password' => 'required|string|min:8'
+        ]);
+
+        $userData = User::create([
+            'email' => $data['email'],
+            'password' => $data['password']
+        ]);
 
         return $userData ? [
             'status' => 200,
