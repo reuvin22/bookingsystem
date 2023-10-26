@@ -1,6 +1,8 @@
 <?php
 
-use App\Http\Controllers\API\V1\LoginController;
+use App\Http\Controllers\API\V1\AuthData\ChangePassController;
+use App\Http\Controllers\API\V1\AuthData\EmailForgotPasswordController;
+use App\Http\Controllers\API\V1\AuthData\LoginController;
 use App\Http\Controllers\API\V1\Rooms\RoomController;
 use App\Http\Controllers\API\V1\Rooms\RoomDetailsController;
 use App\Http\Controllers\API\V1\Rooms\RoomImagesController;
@@ -20,7 +22,9 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('v1')->group(function(){
-    Route::post('/login', LoginController::class);
+    Route::post('/login', [LoginController::class, 'login']);
+    Route::put('/changepass/{id}', [ChangePassController::class, 'changePass']);
+    Route::post('/forgotpass', [EmailForgotPasswordController::class, 'emailForgotPassword']);
     Route::apiResource('/users', UserDataController::class);
     Route::apiResource('/rooms', RoomController::class);
     Route::apiResource('/roomdetails', RoomDetailsController::class);
