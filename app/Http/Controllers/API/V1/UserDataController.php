@@ -16,19 +16,14 @@ class UserDataController extends Controller
      */
     public function index()
     {
-        $data = DB::table('users')
-        ->join('user_data', 'users.id', '=', 'user_data.id')
-        ->get();
+        $data = User::all();
 
         $users = [];
         foreach($data as $datas){
             $response[] = [
                 'id' => $datas->id,
                 'email' => $datas->email,
-                'firstName' => $datas->firstName,
-                'lastName' => $datas->lastName,
-                'address' => $datas->address,
-                'birthDate' => $datas->birthDate
+                'fullName' => $datas->fullName
             ];
             $users = [
                 'status' => 200,
@@ -49,10 +44,7 @@ class UserDataController extends Controller
         $validation = Validator::make($data, [
             'email' => 'required|string|email',
             'password' => 'required|string|min:8',
-            'firstName' => 'required|string',
-            'lastName' => 'required|string',
-            'address' => 'required|string',
-            'birthDate' => 'required|date'
+            'fullName' => 'required|string'
         ]);
         if($validation->fails()){
             return response()->json([
@@ -63,34 +55,17 @@ class UserDataController extends Controller
 
         $user = User::create([
             'email' => $data['email'],
-            'password' => $data['password']
+            'password' => Hash::make($data['password']),
+            'fullName' => $data['fullName']
         ]);
 
-        $userData = UserData::create([
-            'id' => $user->id,
-            'firstName' => $data['firstName'],
-            'lastName' => $data['lastName'],
-            'address' => $data['address'],
-            'birthDate' => $data['birthDate']
-        ]);
-
-        $dataList = [
-            'id' => $user->id,
-            'email' => $user->email,
-            'firstName' => $userData->firstName,
-            'lastName' => $userData->lastName,
-            'address' => $userData->address,
-            'birthDate' => $userData->birthDate
-        ];
-
-        return $user && $userData ? [
+        return response()->json([
             'status' => 200,
-            'message' => 'Data Inserted Successfully',
-            'data' => $dataList
-        ] : [
-            'status' => 400,
-            'message' => 'Data Insert Failed'
-        ];
+            'data' => [
+                'fullName' => $user->fullName,
+                'email' => $user->email
+            ]
+        ], 200);
     }
 
     /**
@@ -98,18 +73,11 @@ class UserDataController extends Controller
      */
     public function show(string $id)
     {
-        $data = DB::table('users')
-        ->join('user_data', 'users.id', '=', 'user_data.id')
-        ->where('users.id', $id)
-        ->first();
-
+        $data = User::findOrFail($id);
         $response = [
             'id' => $data->id,
             'email' => $data->email,
-            'firstName' => $data->firstName,
-            'lastName' => $data->lastName,
-            'address' => $data->address,
-            'birthDate' => $data->birthDate
+            'fullName' => $data->fullName
         ];
         $users = [
             'status' => 200,
@@ -133,10 +101,7 @@ class UserDataController extends Controller
         $dataList = [
             'id' => $users->id,
             'email' => $users->email,
-            'firstName' => $usersData->firstName,
-            'lastName' => $usersData->lastName,
-            'address' => $usersData->address,
-            'birthDate' => $usersData->birthDate
+            'fullName' => $usersData->fullName
         ];
 
         return $update && $updateUserData ? [

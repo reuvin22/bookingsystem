@@ -26,17 +26,12 @@ class LoginController extends Controller
 
         $token = $user->createToken('token')->plainTextToken;
 
-        $userData = DB::table('users')
-        ->join('user_data', 'users.id', '=', 'user_data')
-        ->get();
+        $userData = User::findorFail($id);
 
         $response = [
             'id' => $userData->id,
             'email' => $userData->email,
-            'firstName' => $userData->firstname,
-            'lastName' => $userData->lastName,
-            'birthDate' => $userData->birthDate,
-            'address' => $userData->address,
+            'fullName' => $userData->firstname,
             'token' => $token
         ];
 
