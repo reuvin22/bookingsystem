@@ -14,9 +14,4 @@ class RoomDetails extends Model
         'room_id',
         'room_details'
     ];
-
-    public function room(): BelongsTo
-    {
-        return $this->belongsTo(Room::class, 'id');
-    }
 }

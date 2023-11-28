@@ -2,10 +2,11 @@
 
 namespace App\Http\Controllers\API\V1\Rooms;
 
-use App\Http\Controllers\Controller;
 use App\Models\Room;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\RoomControllerRequest;
 
 class RoomController extends Controller
 {
@@ -21,19 +22,9 @@ class RoomController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(RoomControllerRequest $request)
     {
-        $data = $request->json()->all();
-
-        $validation = Validator::make($data, [
-            'descriptions' => 'nullable|string'
-        ]);
-        if($validation->fails()){
-            return response()->json([
-                'status' => 400,
-                'message' => $validation->errors()
-            ], 400);
-        }
+        $data = $request->validated();
 
         $room = Room::create([
             'descriptions' => $data['descriptions']
