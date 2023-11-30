@@ -42,10 +42,7 @@ class RoomImagesController extends Controller
      */
     public function show(RoomImages $roomImages)
     {
-        return response()->json([
-            'status' => 200,
-            'data' => $roomImages
-        ], 200);
+        return $roomImages;
     }
 
     /**

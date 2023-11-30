@@ -37,10 +37,7 @@ class RoomDetailsController extends Controller
      */
     public function show(RoomDetails $roomDetails)
     {
-        return response()->json([
-            'status' => 200,
-            'data' => $roomDetails
-        ], 200);
+        return $roomDetails;
     }
 
     /**

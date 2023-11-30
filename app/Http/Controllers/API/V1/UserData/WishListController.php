@@ -44,7 +44,7 @@ class WishListController extends Controller
      */
     public function show(wishList $wishList)
     {
-        return response()->json($wishList);
+        return $wishList;
     }
 
     /**

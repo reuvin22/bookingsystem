@@ -37,10 +37,7 @@ class RoomController extends Controller
      */
     public function show(Room $room)
     {
-        return response()->json([
-            'status' => 200,
-            'data' => $room
-        ], 200);
+       return Room::find($room);
     }
 
     /**
