@@ -22,7 +22,7 @@ class RoomDetailsController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(RoomDetailsRequest $request)
     {
         $roomDetails = RoomDetails::create($request->validated());
         return response()->json([

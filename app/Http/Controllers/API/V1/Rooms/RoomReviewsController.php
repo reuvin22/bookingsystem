@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\API\V1\Rooms;
 
-use App\Http\Controllers\Controller;
 use App\Models\RoomDetails;
 use App\Models\RoomReviews;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\Room\RoomReviewsRequest;
 
 class RoomReviewsController extends Controller
 {

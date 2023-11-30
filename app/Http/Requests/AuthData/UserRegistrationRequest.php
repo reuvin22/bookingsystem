@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Room;
+namespace App\Http\Requests\AuthData;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class RoomImagesRequest extends FormRequest
+class UserRegistrationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -22,7 +22,9 @@ class RoomImagesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'room_images' => 'string|nullable'
+            'fullname' => 'string|required',
+            'email' => 'email|required',
+            'password' => 'string|required'
         ];
     }
 }
