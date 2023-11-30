@@ -6,6 +6,7 @@ use App\Models\wishList;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Requests\UserData\WishListRequest;
 
 class WishListController extends Controller
 {
@@ -14,7 +15,7 @@ class WishListController extends Controller
      */
     public function index()
     {
-        return wishList::all();
+        return response(wishList::all());
     }
 
     /**
@@ -25,7 +26,6 @@ class WishListController extends Controller
         $data = $request->json()->all();
         $user = Auth::user();
         $userId = $user->id();
-        $wishLists = [];
 
         $wishList = wishList::create([
             'user_id' => $user->id,
@@ -42,48 +42,32 @@ class WishListController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(wishList $wishList, $id)
+    public function show(wishList $wishList)
     {
-        $wishList = wishList::findorFail($id);
-
-        if(empty($wishList)){
-            return response()->json([
-                'status' => 200,
-                'data' => 'No Record Found'
-            ], 200);
-        }
-
-        return response()->json([
-            'status' => 200,
-            'data' => $wishList
-        ], 200);
+        return response()->json($wishList);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, $id)
+    public function update(WishListRequest $request, wishList $wishList)
     {
-        $wishList = wishList::findorFail($id);
-
-        $update = $wishList->update($request->json()->all());
+        $wishList->update($request->validated());
         return response()->json([
             'status' => 200,
-            'data' => $wishList
-        ],200);
+            'message' => 'Data Updated Successfully'
+        ], 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy($id)
+    public function destroy(wishList $wishList)
     {
-        $wishList = wishList::findorFail($id);
-        $delete = $wishList->delete($id);
-
+        $wishList->delete();
         return response()->json([
             'status' => 200,
-            'message' => 'Data has been deleted'
-        ]);
+            'message' => 'Data Deleted Successfully'
+        ], 200);
     }
 }

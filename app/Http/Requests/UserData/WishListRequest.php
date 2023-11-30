@@ -1,17 +1,17 @@
 <?php
 
-namespace App\Http\Requests\AuthData;
+namespace App\Http\Requests\UserData;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserRegistrationRequest extends FormRequest
+class WishListRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -22,9 +22,8 @@ class UserRegistrationRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'fullname' => 'string|required',
-            'email' => 'email|required',
-            'password' => 'string|required|min:8'
+            'user_id' => 'required|integer',
+            'room_id' => 'required|integer'
         ];
     }
 }
