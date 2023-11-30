@@ -2,11 +2,12 @@
 
 namespace App\Http\Controllers\API\V1\Rooms;
 
-use App\Http\Controllers\Controller;
 use App\Models\Room;
 use App\Models\RoomDetails;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\Room\RoomDetailsRequest;
 
 class RoomDetailsController extends Controller
 {
@@ -15,9 +16,7 @@ class RoomDetailsController extends Controller
      */
     public function index()
     {
-        $detail = RoomDetails::all();
-
-        return response($detail, 200);
+        return response(RoomDetails::all());
     }
 
     /**
@@ -25,87 +24,47 @@ class RoomDetailsController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->json()->all();
-
-        $validation = Validator::make($data, [
-            'room_id' => 'required|integer',
-            'room_details' => 'nullable|string'
-        ]);
-        if($validation->fails()){
-            return response()->json([
-                'status' => 400,
-                'message' => $validation->errors()
-            ], 400);
-        }
-
-        $room = RoomDetails::create([
-            'room_id' => $data['room_id'],
-            'room_details' => $data['room_details']
-        ]);
-
-        return $room ? [
+        $roomDetails = RoomDetails::create($request->validated());
+        return response()->json([
             'status' => 200,
             'message' => 'Data Inserted Successfully',
-            'data' => $room
-        ]: [
-            'status' => 400,
-            'message' => 'Data Insert Failed',
-        ];
+            'data' => $roomDetails
+        ], 200);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(RoomDetails $roomDetails)
     {
-        $room = RoomDetails::findorFail($id);
-
-        $data = [
-            'id' => $room->id,
-            'room_Id' => $room->room_id,
-            'room_details' => $room->room_details
-        ];
-        return (empty($data)) ? [
+        return response()->json([
             'status' => 200,
-            'message' => 'No Record Found'
-        ]: [
-            'status' => 200,
-            'data' => $room
-        ];
+            'data' => $roomDetails
+        ], 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(RoomDetails $roomDetails, RoomDetailsRequest $request)
     {
-        $room = RoomDetails::findorFail($id);
-        $update = $room->update($request->json()->all());
-
-        return $update ? [
-            'status' => 200,
-            'message' => 'Data Updated Successfully',
-            'data' => $room
-        ]: [
-            'status' => 400,
-            'message' => 'Data Update Failed'
-        ];
+       $roomDetails->update($request->validated());
+       return response()->json([
+        'status' => 200,
+        'message' => 'Data Updated Successfully',
+        'data' => $roomDetails
+       ], 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(RoomDetails $roomDetails)
     {
-        $room = RoomDetails::findorFail($id);
-        $delete = $room->delete($id);
-
-        return $delete ? [
+        $roomDetails->delete();
+        return response()->json([
             'status' => 200,
-            'message' => 'Deleted Successfully'
-        ]: [
-            'status' => 400,
-            'message' => 'Delete Data Failed'
-        ];
+            'message' => 'Data Deleted Successfully'
+        ], 200);
     }
 }

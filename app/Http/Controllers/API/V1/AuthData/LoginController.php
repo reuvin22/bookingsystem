@@ -17,7 +17,7 @@ class LoginController extends Controller
 
         $user = User::where('email', $data['email'])->first();
 
-        if(!$user || Hash::check($data['password'], $user->password)){
+        if(!$user || Hash::check($data['password'], !$user->password)){
             return response()->json([
                 'status' => 400,
                 'message' => 'Unauthorized User'
@@ -26,12 +26,10 @@ class LoginController extends Controller
 
         $token = $user->createToken('token')->plainTextToken;
 
-        $userData = User::findorFail($id);
-
         $response = [
-            'id' => $userData->id,
-            'email' => $userData->email,
-            'fullName' => $userData->firstname,
+            'id' => $user->id,
+            'email' => $user->email,
+            'fullName' => $user->fullname,
             'token' => $token
         ];
 

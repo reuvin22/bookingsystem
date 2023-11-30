@@ -1,14 +1,15 @@
 <?php
 
+use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\API\V1\UserData\WishListController;
+use App\Http\Controllers\API\V1\Rooms\RoomController;
+use App\Http\Controllers\API\V1\AuthData\LoginController;
+use App\Http\Controllers\API\V1\AuthData\UserRegistration;
+use App\Http\Controllers\API\V1\Rooms\RoomImagesController;
+use App\Http\Controllers\API\V1\Rooms\RoomDetailsController;
+use App\Http\Controllers\API\V1\Rooms\RoomReviewsController;
 use App\Http\Controllers\API\V1\AuthData\ChangePassController;
 use App\Http\Controllers\API\V1\AuthData\EmailForgotPasswordController;
-use App\Http\Controllers\API\V1\AuthData\LoginController;
-use App\Http\Controllers\API\V1\Rooms\RoomController;
-use App\Http\Controllers\API\V1\Rooms\RoomDetailsController;
-use App\Http\Controllers\API\V1\Rooms\RoomImagesController;
-use App\Http\Controllers\API\V1\Rooms\RoomReviewsController;
-use App\Http\Controllers\API\V1\UserDataController;
-use Illuminate\Support\Facades\Route;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,12 +23,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::prefix('v1')->group(function(){
+    require __DIR__ . '\Rooms\rooms.php';
     Route::post('/login', [LoginController::class, 'login']);
     Route::put('/changepass/{id}', [ChangePassController::class, 'changePass']);
     Route::post('/forgotpass', [EmailForgotPasswordController::class, 'emailForgotPassword']);
-    Route::apiResource('/users', UserDataController::class);
-    Route::apiResource('/rooms', RoomController::class);
-    Route::apiResource('/roomdetails', RoomDetailsController::class);
-    Route::apiResource('/roomratings', RoomReviewsController::class);
-    Route::apiResource('/roomimages', RoomImagesController::class);
+    Route::apiResource('/users', UserRegistration::class);
+    Route::apiResource('/wishlist', WishListController::class);
 });

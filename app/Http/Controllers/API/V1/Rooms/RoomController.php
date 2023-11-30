@@ -5,8 +5,8 @@ namespace App\Http\Controllers\API\V1\Rooms;
 use App\Models\Room;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Room\RoomRequest;
 use Illuminate\Support\Facades\Validator;
-use App\Http\Requests\RoomControllerRequest;
 
 class RoomController extends Controller
 {
@@ -22,76 +22,49 @@ class RoomController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(RoomControllerRequest $request)
+    public function store(RoomRequest $request)
     {
-        $data = $request->validated();
-
-        $room = Room::create([
-            'descriptions' => $data['descriptions']
-        ]);
-
-        return $room ? [
+        $room = Room::create($request->validated());
+        return response()->json([
             'status' => 200,
             'message' => 'Data Inserted Successfully',
             'data' => $room
-        ]: [
-            'status' => 400,
-            'message' => 'Data Insert Failed',
-        ];
+        ], 200);
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Room $room)
     {
-        $user = Room::findorFail($id);
-
-        $data = [
-            'id' => $user->id,
-            'description' => $user->description,
-        ];
-        return (empty($data)) ? [
+        return response()->json([
             'status' => 200,
-            'message' => 'No Record Found'
-        ]: [
-            'status' => 200,
-            'data' => $user
-        ];
+            'data' => $room
+        ], 200);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(RoomRequest $request, Room $room)
     {
-        $room = Room::findorFail($id);
-        $update = $room->update($request->json()->all());
-
-        return $update ? [
+        $room->update($request->validated);
+        return response()->json([
             'status' => 200,
             'message' => 'Data Updated Successfully',
             'data' => $room
-        ]: [
-            'status' => 400,
-            'message' => 'Data Update Failed'
-        ];
+        ], 200);
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Room $room)
     {
-        $room = Room::findorFail($id);
-        $delete = $room->delete($id);
-
-        return $delete ? [
+        $room->delete();
+        return response()->json([
             'status' => 200,
-            'message' => 'Deleted Successfully'
-        ]: [
-            'status' => 400,
-            'message' => 'Delete Data Failed'
-        ];
+            'message' => 'Data Deleted Successfully'
+        ],200);
     }
 }
