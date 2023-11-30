@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('room_images', function (Blueprint $table) {
             $table->id();
             $table->foreignId('room_id');
-            $table->string('room_images', 1000);
+            $table->string('room_images', 3000);
             $table->timestamps();
         });
     }

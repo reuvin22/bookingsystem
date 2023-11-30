@@ -22,7 +22,7 @@ class RoomImagesRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'room_images' => 'string|nullable'
+            'room_images' => 'required|image|mimes:png,jpg,jpeg|max:3000'
         ];
     }
 }
