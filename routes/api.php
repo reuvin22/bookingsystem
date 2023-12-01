@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\API\V1\Rooms\RoomController;
 use App\Http\Controllers\API\V1\AuthData\LoginController;
 use App\Http\Controllers\API\V1\AuthData\UserRegistration;
-use App\Http\Controllers\API\V1\Payments\PaymentController;
 use App\Http\Controllers\API\V1\Rooms\RoomImagesController;
 use App\Http\Controllers\API\V1\Rooms\RoomDetailsController;
 use App\Http\Controllers\API\V1\Rooms\RoomReviewsController;
@@ -25,11 +24,11 @@ use App\Http\Controllers\API\V1\AuthData\EmailForgotPasswordController;
 
 Route::prefix('v1')->group(function(){
     require __DIR__ . '\Rooms\rooms.php';
+    require __DIR__ . '\Payments\payments.php';
     Route::post('/login', [LoginController::class, 'login']);
     Route::post('/register', [UserRegistration::class, 'store']);
     Route::put('/changepass/{id}', [ChangePassController::class, 'changePass']);
     Route::post('/forgotpass', [EmailForgotPasswordController::class, 'emailForgotPassword']);
     Route::apiResource('/users', UserRegistration::class);
     Route::apiResource('/wishlist', WishListController::class);
-    Route::post('/payment', [PaymentController::class, 'createPayment']);
 });

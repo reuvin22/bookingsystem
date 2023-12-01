@@ -6,6 +6,7 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "grpc/grpc": "^1.57",
         "guzzlehttp/guzzle": "^7.8",
         "jenssegers/mongodb": "*",
         "kreait/firebase-php": "^7.8",
@@ -15,7 +16,9 @@
         "laravel/installer": "^5.1",
         "laravel/sanctum": "^3.3",
         "laravel/tinker": "^2.8",
-        "mongodb/laravel-mongodb": "^4.0"
+        "mongodb/laravel-mongodb": "^4.0",
+        "ramsey/uuid": "^4.7",
+        "stripe/stripe-php": "^10.21"
     },
     "require-dev": {
         "fakerphp/faker": "^1.9.1",

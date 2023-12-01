@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "7fe6c822c043fb2d6ee56ff899913503",
+    "content-hash": "e0eb0189970afccdb5cc4780ec3ec4ce",
     "packages": [
         {
             "name": "beste/clock",
@@ -76,21 +76,21 @@
         },
         {
             "name": "beste/json",
-            "version": "1.3.0",
+            "version": "1.4.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/beste/json.git",
-                "reference": "19d978b00334151b5f81ab0a82a4e43804a3027d"
+                "reference": "2d7aea5a7ceeb428350ba450e4a227ac581359b4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/beste/json/zipball/19d978b00334151b5f81ab0a82a4e43804a3027d",
-                "reference": "19d978b00334151b5f81ab0a82a4e43804a3027d",
+                "url": "https://api.github.com/repos/beste/json/zipball/2d7aea5a7ceeb428350ba450e4a227ac581359b4",
+                "reference": "2d7aea5a7ceeb428350ba450e4a227ac581359b4",
                 "shasum": ""
             },
             "require": {
                 "ext-json": "*",
-                "php": "~8.2.0 || ~8.3.0"
+                "php": "~8.1.0 || ~8.2.0 || ~8.3.0"
             },
             "require-dev": {
                 "phpstan/extension-installer": "^1.3",
@@ -123,7 +123,7 @@
             ],
             "support": {
                 "issues": "https://github.com/beste/json/issues",
-                "source": "https://github.com/beste/json/tree/1.3.0"
+                "source": "https://github.com/beste/json/tree/1.4.0"
             },
             "funding": [
                 {
@@ -131,7 +131,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-11-25T16:08:31+00:00"
+            "time": "2023-11-30T22:41:32+00:00"
         },
         {
             "name": "brick/math",
@@ -751,16 +751,16 @@
         },
         {
             "name": "google/auth",
-            "version": "v1.32.1",
+            "version": "v1.33.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/googleapis/google-auth-library-php.git",
-                "reference": "999e9ce8b9d17914f04e1718271a0a46da4de2f3"
+                "reference": "682dc6c30bb509953c9e43bb0960d901582da00b"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/999e9ce8b9d17914f04e1718271a0a46da4de2f3",
-                "reference": "999e9ce8b9d17914f04e1718271a0a46da4de2f3",
+                "url": "https://api.github.com/repos/googleapis/google-auth-library-php/zipball/682dc6c30bb509953c9e43bb0960d901582da00b",
+                "reference": "682dc6c30bb509953c9e43bb0960d901582da00b",
                 "shasum": ""
             },
             "require": {
@@ -803,9 +803,9 @@
             "support": {
                 "docs": "https://googleapis.github.io/google-auth-library-php/main/",
                 "issues": "https://github.com/googleapis/google-auth-library-php/issues",
-                "source": "https://github.com/googleapis/google-auth-library-php/tree/v1.32.1"
+                "source": "https://github.com/googleapis/google-auth-library-php/tree/v1.33.0"
             },
-            "time": "2023-10-17T21:13:22+00:00"
+            "time": "2023-11-30T15:49:27+00:00"
         },
         {
             "name": "google/cloud-core",
@@ -989,6 +989,50 @@
                 }
             ],
             "time": "2023-11-12T22:16:48+00:00"
+        },
+        {
+            "name": "grpc/grpc",
+            "version": "1.57.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/grpc/grpc-php.git",
+                "reference": "b610c42022ed3a22f831439cb93802f2a4502fdf"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/grpc/grpc-php/zipball/b610c42022ed3a22f831439cb93802f2a4502fdf",
+                "reference": "b610c42022ed3a22f831439cb93802f2a4502fdf",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=7.0.0"
+            },
+            "require-dev": {
+                "google/auth": "^v1.3.0"
+            },
+            "suggest": {
+                "ext-protobuf": "For better performance, install the protobuf C extension.",
+                "google/protobuf": "To get started using grpc quickly, install the native protobuf library."
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Grpc\\": "src/lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "Apache-2.0"
+            ],
+            "description": "gRPC library for PHP",
+            "homepage": "https://grpc.io",
+            "keywords": [
+                "rpc"
+            ],
+            "support": {
+                "source": "https://github.com/grpc/grpc-php/tree/v1.57.0"
+            },
+            "time": "2023-08-14T23:57:54+00:00"
         },
         {
             "name": "guzzlehttp/guzzle",
@@ -1456,16 +1500,16 @@
         },
         {
             "name": "kreait/firebase-php",
-            "version": "7.8.0",
+            "version": "7.9.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kreait/firebase-php.git",
-                "reference": "1e9ba09eeff60aece71c213424f526cf157458b2"
+                "reference": "1a6636017932b7954489698e46b4d1eebeb61143"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kreait/firebase-php/zipball/1e9ba09eeff60aece71c213424f526cf157458b2",
-                "reference": "1e9ba09eeff60aece71c213424f526cf157458b2",
+                "url": "https://api.github.com/repos/kreait/firebase-php/zipball/1a6636017932b7954489698e46b4d1eebeb61143",
+                "reference": "1a6636017932b7954489698e46b4d1eebeb61143",
                 "shasum": ""
             },
             "require": {
@@ -1487,7 +1531,7 @@
                 "kreait/firebase-tokens": "^4.2",
                 "lcobucci/jwt": "^4.3.0|^5.0",
                 "mtdowling/jmespath.php": "^2.6.1",
-                "php": "~8.1.0|~8.2.0",
+                "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
                 "psr/cache": "^1.0.1|^2.0|^3.0",
                 "psr/clock": "^1.0",
                 "psr/http-client": "^1.0",
@@ -1496,14 +1540,14 @@
                 "psr/log": "^1.1|^2.0|^3.0"
             },
             "require-dev": {
-                "friendsofphp/php-cs-fixer": "^3.34.1",
-                "google/cloud-firestore": "^1.37.3",
+                "friendsofphp/php-cs-fixer": "^3.40.0",
+                "google/cloud-firestore": "^1.37.7",
                 "phpstan/extension-installer": "^1.3.1",
-                "phpstan/phpstan": "^1.10.38",
-                "phpstan/phpstan-phpunit": "^1.3.14",
-                "phpunit/phpunit": "^10.4.1",
+                "phpstan/phpstan": "^1.10.46",
+                "phpstan/phpstan-phpunit": "^1.3.15",
+                "phpunit/phpunit": "^10.4.2",
                 "rector/rector": "~0.17.13",
-                "symfony/var-dumper": "^6.3.5"
+                "symfony/var-dumper": "^6.3.5 || ^7.0"
             },
             "suggest": {
                 "google/cloud-firestore": "^1.0 to use the Firestore component"
@@ -1549,20 +1593,20 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-11-25T09:54:56+00:00"
+            "time": "2023-11-30T23:21:42+00:00"
         },
         {
             "name": "kreait/firebase-tokens",
-            "version": "4.2.0",
+            "version": "4.3.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kreait/firebase-tokens-php.git",
-                "reference": "36987b6bc31f85d927eb888cc3752813d33b581f"
+                "reference": "e5a4f09d6fd5b976263e1f3418a4c19bce254ffa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kreait/firebase-tokens-php/zipball/36987b6bc31f85d927eb888cc3752813d33b581f",
-                "reference": "36987b6bc31f85d927eb888cc3752813d33b581f",
+                "url": "https://api.github.com/repos/kreait/firebase-tokens-php/zipball/e5a4f09d6fd5b976263e1f3418a4c19bce254ffa",
+                "reference": "e5a4f09d6fd5b976263e1f3418a4c19bce254ffa",
                 "shasum": ""
             },
             "require": {
@@ -1573,11 +1617,11 @@
                 "guzzlehttp/guzzle": "^7.5",
                 "lcobucci/clock": "^3.0",
                 "lcobucci/jwt": "^4.3.0|^5.0",
-                "php": "~8.1.0|~8.2.0",
+                "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
                 "psr/cache": "^1.0|^2.0|^3.0"
             },
             "require-dev": {
-                "beste/php-cs-fixer-config": "^1.2",
+                "friendsofphp/php-cs-fixer": "^3.40",
                 "phpstan/extension-installer": "^1.2",
                 "phpstan/phpstan": "^1.9.2",
                 "phpstan/phpstan-phpunit": "^1.2.2",
@@ -1617,7 +1661,7 @@
             ],
             "support": {
                 "issues": "https://github.com/kreait/firebase-tokens-php/issues",
-                "source": "https://github.com/kreait/firebase-tokens-php/tree/4.2.0"
+                "source": "https://github.com/kreait/firebase-tokens-php/tree/4.3.0"
             },
             "funding": [
                 {
@@ -1625,27 +1669,27 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-03-21T22:45:31+00:00"
+            "time": "2023-11-30T23:04:35+00:00"
         },
         {
             "name": "kreait/laravel-firebase",
-            "version": "5.4.0",
+            "version": "5.5.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/kreait/laravel-firebase.git",
-                "reference": "a17491f089cd6f2a628ef0c104e2de077b3c08b2"
+                "reference": "0cd2f7f7fbb53f94f0afe03820af1cd27d937a1e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/kreait/laravel-firebase/zipball/a17491f089cd6f2a628ef0c104e2de077b3c08b2",
-                "reference": "a17491f089cd6f2a628ef0c104e2de077b3c08b2",
+                "url": "https://api.github.com/repos/kreait/laravel-firebase/zipball/0cd2f7f7fbb53f94f0afe03820af1cd27d937a1e",
+                "reference": "0cd2f7f7fbb53f94f0afe03820af1cd27d937a1e",
                 "shasum": ""
             },
             "require": {
                 "illuminate/contracts": "^9.0 || ^10.0",
                 "illuminate/support": "^9.0 || ^10.0",
                 "kreait/firebase-php": "^7.0",
-                "php": "~8.1.0 || ~8.2.0",
+                "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
                 "symfony/cache": "^6.1.2"
             },
             "require-dev": {
@@ -1691,7 +1735,7 @@
             ],
             "support": {
                 "issues": "https://github.com/kreait/laravel-firebase/issues",
-                "source": "https://github.com/kreait/laravel-firebase/tree/5.4.0"
+                "source": "https://github.com/kreait/laravel-firebase/tree/5.5.0"
             },
             "funding": [
                 {
@@ -1699,7 +1743,7 @@
                     "type": "github"
                 }
             ],
-            "time": "2023-10-05T21:49:15+00:00"
+            "time": "2023-12-01T04:27:02+00:00"
         },
         {
             "name": "laravel/cashier",

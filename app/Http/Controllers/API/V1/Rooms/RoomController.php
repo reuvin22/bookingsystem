@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Room\RoomRequest;
 use Illuminate\Support\Facades\Validator;
+use App\Http\Resources\RoomResource;
 
 class RoomController extends Controller
 {
@@ -37,7 +38,7 @@ class RoomController extends Controller
      */
     public function show(Room $room)
     {
-       return Room::find($room);
+       return new RoomResource($room);
     }
 
     /**
