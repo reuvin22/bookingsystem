@@ -64,12 +64,10 @@ return [
         ],
 
         'mongodb' => [
-            'driver'   => 'mongodb',
-            'host'     => env('MONGO_DB_HOST', '127.0.0.1'),
-            'port'     => env('MONGO_DB_PORT', 27017),
-            'database' => env('MONGO_DB_DATABASE', 'Project-FindSpot')
+            'driver' => 'mongodb',
+            'dsn' => env('DB_URI', 'mongodb+srv://reuvin111:reuvin12345@findspot.wbfayay.mongodb.net/'),
+            'database' => 'chatapi',
         ],
-
         'pgsql' => [
             'driver' => 'pgsql',
             'url' => env('DATABASE_URL'),

@@ -15,6 +15,10 @@ class RoomImages extends Model
         'room_images'
     ];
 
+    protected $attributes = [
+        'room_id' => 1, // Set your default room_id value here
+    ];
+
     public function room()
     {
         return $this->belongsTo(Room::class, 'id');

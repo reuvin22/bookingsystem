@@ -25,6 +25,7 @@ use App\Http\Controllers\API\V1\AuthData\EmailForgotPasswordController;
 Route::prefix('v1')->group(function(){
     require __DIR__ . '\Rooms\rooms.php';
     require __DIR__ . '\Payments\payments.php';
+    require __DIR__ . '\Chats\chats.php';
     Route::post('/login', [LoginController::class, 'login']);
     Route::post('/register', [UserRegistration::class, 'store']);
     Route::put('/changepass/{id}', [ChangePassController::class, 'changePass']);

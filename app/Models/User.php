@@ -4,12 +4,13 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\HasMany;
-use Illuminate\Foundation\Auth\User as Authenticatable;
-use Illuminate\Notifications\Notifiable;
+use App\Models\ChatApi;
 use Laravel\Sanctum\HasApiTokens;
+use Illuminate\Notifications\Notifiable;
+use Illuminate\Contracts\Auth\MustVerifyEmail;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Foundation\Auth\User as Authenticatable;
 
 class User extends Authenticatable implements MustVerifyEmail
 {
@@ -49,11 +50,15 @@ class User extends Authenticatable implements MustVerifyEmail
 
     public function room()
     {
-        $this->hasMany(Room::class, 'room_id');
+        return $this->hasMany(Room::class, 'user_id');
     }
 
+    public function chats()
+    {
+        return $this->hasMany(ChatApi::class, 'user_id');
+    }
     public function wishList()
     {
-        $this->hasOne(wishList::class, 'user_id');
+        return $this->hasOne(wishList::class, 'user_id');
     }
 }

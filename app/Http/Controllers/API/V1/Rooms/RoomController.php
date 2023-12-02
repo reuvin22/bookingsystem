@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Room\RoomRequest;
 use Illuminate\Support\Facades\Validator;
 use App\Http\Resources\RoomResource;
+use Illuminate\Support\Facades\DB;
 
 class RoomController extends Controller
 {
@@ -16,8 +17,8 @@ class RoomController extends Controller
      */
     public function index()
     {
-        $room = Room::paginate(8);
-        return response($room, 200);
+        $rooms = Room::paginate(8); 
+        return RoomResource::collection($rooms);
     }
 
     /**

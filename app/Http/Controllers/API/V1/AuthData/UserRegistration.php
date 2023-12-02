@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\API\V1\AuthData;
 
 use App\Models\User;
+use App\Models\ChatApi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\UserResource;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\AuthData\UserRegistrationRequest;
 use App\Http\Controllers\API\V1\AuthData\UserRegistration;
@@ -43,7 +45,15 @@ class UserRegistration extends Controller
      */
     public function show(User $user)
     {
-        return $user;
+        $userResource = new UserResource($user);
+        $chats= $user->chats;
+        return response()->json([
+            'status' => 200,
+            'data' => [
+                'user' => $userResource,
+                'chats' => $chats
+            ]
+        ], 200);
     }
 
     /**
