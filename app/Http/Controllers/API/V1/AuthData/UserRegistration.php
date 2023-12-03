@@ -6,7 +6,9 @@ use App\Models\User;
 use App\Models\ChatApi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Http\Resources\ChatResource;
 use App\Http\Resources\UserResource;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Requests\AuthData\UserRegistrationRequest;
 use App\Http\Controllers\API\V1\AuthData\UserRegistration;
@@ -31,7 +33,7 @@ class UserRegistration extends Controller
         $user = User::create([
             'fullname' => $data['fullname'],
             'email' => $data['email'],
-            'password' => Hash::make($data['password'])
+            'password' => Hash::make($data['password']),
         ]);
 
         return response()->json([
@@ -43,16 +45,14 @@ class UserRegistration extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(User $user)
+    public function show(string $id)
     {
-        $userResource = new UserResource($user);
-        $chats= $user->chats;
+        $chat = ChatApi::where('user_id', $id)->get();
+        $user = User::find($id);
         return response()->json([
             'status' => 200,
-            'data' => [
-                'user' => $userResource,
-                'chats' => $chats
-            ]
+            'user' => new UserResource($user),
+            'chats' => $chat
         ], 200);
     }
 

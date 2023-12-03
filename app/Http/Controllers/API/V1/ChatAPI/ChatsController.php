@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\API\V1\ChatAPI;
 
+use App\Models\User;
 use App\Models\ChatApi;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
@@ -28,7 +29,9 @@ class ChatsController extends Controller
         $chats = ChatApi::create([
             'user_id' => $data['user_id'],
             'chat' => $data['chat'],
-            'name' => $data['name']
+            'from' => $data['name'],
+            'to' => $data['to'],
+            'receiver_id' => $data['receiver_id']
         ]);
 
         return response()->json([
@@ -42,7 +45,8 @@ class ChatsController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $chat = ChatApi::where('user_id', $id)->get();
+        return $chat;
     }
 
     /**

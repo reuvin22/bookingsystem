@@ -2,6 +2,7 @@
 
 namespace App\Http\Resources;
 
+use App\Models\ChatApi;
 use Illuminate\Http\Request;
 use App\Http\Resources\RoomResource;
 use Illuminate\Http\Resources\Json\JsonResource;
@@ -18,7 +19,7 @@ class UserResource extends JsonResource
         return [
             'email' => $this->email,
             'fullName' => $this->fullName,
-            'rooms' => new RoomResource($this->rooms),
+            'rooms' => new RoomResource($this->rooms)
         ];
     }
 }

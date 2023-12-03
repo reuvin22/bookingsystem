@@ -15,7 +15,9 @@ class ChatApi extends Model
     protected $fillable = [
         'user_id',
         'chat',
-        'name'
+        'name',
+        'to',
+        'receiver_id'
     ];
 
     public function user()
